@@ -1,5 +1,8 @@
+server:
+  port: 4000
+
 spring:
   data:
     mongodb:
-      database: Products-DB
       uri: mongodb+srv://cien2460045:06M24L9cAKnzW5Dp@products-db.rl1kh.mongodb.net/?retryWrites=true&w=majority&appName=Products-DB
+      database: Products-DB
