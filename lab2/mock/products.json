@@ -1,0 +1,83 @@
+[
+  {
+    "id": "id1",
+    "name": "Product title 1",
+    "description": "Product 1 description",
+    "price": 100,
+    "quantity": 10,
+    "changelogs": [
+      {
+        "properyName": "price",
+        "oldValue": "50",
+        "newValue": "100",
+        "timestamp": "2021-01-01"
+      }
+    ]
+  },
+  {
+    "id": "id2",
+    "name": "Product 2",
+    "description": "Product 1 description",
+    "price": 100,
+    "quantity": 10,
+    "changelogs": [
+      {
+        "properyName": "price",
+        "oldValue": "50",
+        "newValue": "100",
+        "timestamp": "2021-01-01"
+      }
+    ]
+  },
+  {
+    "id": "id3",
+    "name": "Product 3",
+    "description": "Product 3 description",
+    "price": 150,
+    "quantity": 5,
+    "changelogs": [
+      {
+        "properyName": "price",
+        "oldValue": "120",
+        "newValue": "150",
+        "timestamp": "2021-02-01"
+      }
+    ]
+  },
+  {
+    "id": "id4",
+    "name": "Product 4",
+    "description": "Product 4 description",
+    "price": 200,
+    "quantity": 8,
+    "changelogs": [
+      {
+        "properyName": "price",
+        "oldValue": "180",
+        "newValue": "200",
+        "timestamp": "2021-03-01"
+      }
+    ]
+  },
+  {
+    "id": "id5",
+    "name": "Product 5",
+    "description": "Product 5 description",
+    "price": 250,
+    "quantity": 12,
+    "changelogs": [
+      {
+        "properyName": "price",
+        "oldValue": "220",
+        "newValue": "250",
+        "timestamp": "2021-04-01"
+      },
+      {
+        "properyName": "quantity",
+        "oldValue": "10",
+        "newValue": "12",
+        "timestamp": "2021-04-02"
+      }
+    ]
+  }
+]
