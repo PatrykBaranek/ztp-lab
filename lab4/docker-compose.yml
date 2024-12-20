@@ -1,0 +1,84 @@
+services:
+  mongo:
+    image: mongo:6.0
+    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    healthcheck:
+      test: ['CMD', 'mongosh', '--eval', "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    logging:
+      driver: 'none'
+
+  rabbitmq:
+    image: rabbitmq:4-management
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    logging:
+      driver: 'none'
+
+  notification-system:
+    build:
+      context: .
+      dockerfile: ./apps/notification-system/Dockerfile
+    ports:
+      - '3000:3000'
+    depends_on:
+      - rabbitmq
+      - mongo
+    environment:
+      - RABBIT_URI=amqp://user:password@rabbitmq:5672
+      - MONGODB_URI=mongodb://root:example@mongo:27017
+
+  scheduler-service:
+    build:
+      context: .
+      dockerfile: ./apps/scheduler-service/Dockerfile
+    depends_on:
+      mongo:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
+      notification-system:
+        condition: service_started
+      email-service:
+        condition: service_started
+      push-service:
+        condition: service_started
+    ports:
+      - '3001:3001'
+    environment:
+      - RABBIT_URI=amqp://user:password@rabbitmq:5672
+      - MONGODB_URI=mongodb://root:example@mongo:27017
+
+  email-service:
+    build:
+      context: .
+      dockerfile: ./apps/email-service/Dockerfile
+    ports:
+      - '3002:3002'
+    depends_on:
+      - rabbitmq
+      - notification-system
+
+  push-service:
+    build:
+      context: .
+      dockerfile: ./apps/push-service/Dockerfile
+    ports:
+      - '3003:3003'
+    depends_on:
+      - rabbitmq
+      - notification-system
+
+volumes:
+  postgres_data:
