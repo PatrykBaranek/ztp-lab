@@ -1,0 +1,16 @@
+{
+  "name": "notification-microservices",
+  "private": true,
+  "workspaces": [
+    "notification-system",
+    "push-service",
+    "scheduler-service",
+    "email-service"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "build:all": "npm run build --workspaces",
+    "start:all": "docker-compose up --build",
+    "test:all": "npm run test --workspaces"
+  }
+}
