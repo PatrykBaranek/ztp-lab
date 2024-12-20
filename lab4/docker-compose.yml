@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  notification-system:
+    build:
+      context: .
+      dockerfile: notification-system/Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+
+  push-service:
+    build:
+      context: .
+      dockerfile: push-service/Dockerfile
+    ports:
+      - '3001:3001'
+    environment:
+      - NODE_ENV=development
+
+  scheduler-service:
+    build:
+      context: .
+      dockerfile: scheduler-service/Dockerfile
+    ports:
+      - '3002:3002'
+    environment:
+      - NODE_ENV=development
+
+  email-service:
+    build:
+      context: .
+      dockerfile: email-service/Dockerfile
+    ports:
+      - '3003:3003'
+    environment:
+      - NODE_ENV=development
